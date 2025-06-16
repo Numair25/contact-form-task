@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            max-width: 600px;
+            margin: auto;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        input.error, textarea.error {
+            border-color: red;
+        }
+        .error-message {
+            color: red;
+            display: none;
+            font-size: 0.875em;
+        }
+        button {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <form id="contactForm">
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name">
+            <span class="error-message" id="nameError">This field is required</span>
+        </div>
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email">
+            <span class="error-message" id="emailError">Please enter a valid email</span>
+        </div>
+        <div class="form-group">
+            <label for="message">Message:</label>
+            <textarea id="message" name="message"></textarea>
+            <span class="error-message" id="messageError">This field is required</span>
+        </div>
+        <button type="submit">Submit</button>
+    </form>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const form = document.getElementById('contactForm');
+            const nameInput = document.getElementById('name');
+            const emailInput = document.getElementById('email');
+            const messageInput = document.getElementById('message');
+
+            const nameError = document.getElementById('nameError');
+            const emailError = document.getElementById('emailError');
+            const messageError = document.getElementById('messageError');
+
+            const validateName = () => {
+                if (!nameInput.value.trim()) {
+                    nameInput.classList.add('error');
+                    nameError.style.display = 'block';
+                } else {
+                    nameInput.classList.remove('error');
+                    nameError.style.display = 'none';
+                }
+            };
+
+            const validateEmail = () => {
+                const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailPattern.test(emailInput.value.trim())) {
+                    emailInput.classList.add('error');
+                    emailError.style.display = 'block';
+                } else {
+                    emailInput.classList.remove('error');
+                    emailError.style.display = 'none';
+                }
+            };
+
+            const validateMessage = () => {
+                if (!messageInput.value.trim()) {
+                    messageInput.classList.add('error');
+                    messageError.style.display = 'block';
+                } else {
+                    messageInput.classList.remove('error');
+                    messageError.style.display = 'none';
+                }
+            };
+
+            nameInput.addEventListener('blur', validateName);
+            emailInput.addEventListener('blur', validateEmail);
+            messageInput.addEventListener('blur', validateMessage);
+
+            form.addEventListener('submit', (event) => {
+                validateName();
+                validateEmail();
+                validateMessage();
+
+                if (form.querySelector('.error')) {
+                    event.preventDefault(); // Prevent form submission if there are errors
+                }
+            });
+        });
+    </script>
+</body>
+</html>
