@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,27 +12,35 @@
             max-width: 600px;
             margin: auto;
         }
+
         .form-group {
             margin-bottom: 15px;
         }
+
         label {
             display: block;
             margin-bottom: 5px;
         }
-        input, textarea {
+
+        input,
+        textarea {
             width: 100%;
             padding: 8px;
             border: 1px solid #ccc;
             border-radius: 4px;
         }
-        input.error, textarea.error {
+
+        input.error,
+        textarea.error {
             border-color: red;
         }
+
         .error-message {
             color: red;
             display: none;
             font-size: 0.875em;
         }
+
         button {
             padding: 10px 15px;
             border: none;
@@ -40,11 +49,13 @@
             color: #fff;
             cursor: pointer;
         }
+
         button:hover {
             background-color: #0056b3;
         }
     </style>
 </head>
+
 <body>
     <form id="contactForm">
         <div class="form-group">
@@ -115,7 +126,8 @@
                 validateName();
                 validateEmail();
                 validateMessage();
-
+                // Hey I have added debug log message here
+                console.log("Test Debug Message");
                 if (form.querySelector('.error')) {
                     event.preventDefault(); // Prevent form submission if there are errors
                 }
@@ -123,4 +135,5 @@
         });
     </script>
 </body>
+
 </html>
